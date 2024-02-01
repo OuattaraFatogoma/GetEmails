@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-png">
+    <script src="./script.js" defer></script>
+    <title>GetEmails</title>
+</head>
+<body>
+    <header>
+        <h1>GetEmails</h1>
+    </header>
+
+    <hr class="top"/>
+
+    <section>
+        <!-- Form to provide input -->
+        <form>
+            <div class="container">
+                <div>
+                    <label for="site">Site*:</label>
+                    <input type="text" value="linkedin.com" id="site" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <select id="email">
+                        <option value="@gmail.com" class="gmail">@gmail.com</option>
+                        <option value="@hotmail.com" class="hotmail">@hotmail.com</option>
+                        <option value="@yahoo.com" class="yahoo">@yahoo.com</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="title">Title*:</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div>
+                    <label for="country">Country:</label>
+                    <input type="text" id="country">
+                </div>
+                <div>
+                    <label for="city">City:</label>
+                    <input type="text" id="city">
+                </div>
+                <div>
+                    <label for="include">Include Keywords:</label>
+                    <input type="text" id="include">
+                </div>
+                <div>
+                    <label for="exclude">Exclude Keywords:</label>
+                    <input type="text" id="exclude">
+                </div>
+            </div>
+            <button type="submit">Collect Emails</button>
+        </form>
+
+        <!-- Loading element -->
+        <dialog >
+            <p>Wait a bit</p>
+            <div class="lds-facebook">
+                <div></div><div></div><div></div>
+            </div>
+        </dialog>
+        <!-- Display emails collected -->
+        <div class="output">
+            <textarea name="emails" cols="30" rows="10" readonly></textarea>
+            <button class="copy">Copy</button>
+        </div>
+    </section>
+
+    <hr class="bottom"/>
+
+    <footer>
+        <p>Signal Bugs : fatogomao66@gmail.com</p>
+        <p>Suggestions? : fatogomao66@gmail.com</p>
+        <p>By <a href="https://www.linkedin.com/in/fatogoma/">Fatogoma</a></p>
+    </footer>
+</body>
+</html>
