@@ -9,6 +9,12 @@ const exclude = document.querySelector('#exclude');
 const display = document.querySelector('textarea');
 const loading = document.querySelector('dialog');
 const copyBtn = document.querySelector('.copy')
+const notification = document.querySelector('.notification');
+const closeNotification = document.querySelector('.notification>button');
+const successAudio = document.querySelector('.successAudio');
+const dangerAudio = document.querySelector('.dangerAudio');
+
+
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -25,10 +31,11 @@ form.addEventListener('submit', async (event) => {
         });
         if(response.status === 500) throw new Error("Something went wrong please try again");
         const emails = await response.json(); 
-        display.value = emails.join("\n");
+        display.value = emails.join(",\n");
         copyBtn.style.display = "block";
+        notify("Emails List ready !");
     } catch (error) {
-        // TODO: display error to user
+        notify("Something went wrong, try again", "danger");
     }finally{
         loading.close();
     }
@@ -37,7 +44,7 @@ form.addEventListener('submit', async (event) => {
 
 copyBtn.addEventListener("click", () => {
     navigator.clipboard.writeText(display.value);
-    // Todo alert copy successfully 
+    notify("Copy to clipboard");
 });
 
 
@@ -53,3 +60,19 @@ const getMessage = () =>{
     return message;
 }
 
+
+const notify = (message, type = "success") => {
+    if(type === "danger"){
+        notification.style.backgroundColor = "darkred";
+        dangerAudio.play();
+
+    } else{
+        successAudio.play();
+    }
+    notification.children[0].textContent = message;
+    notification.style.transform = "translateY(100%)";
+    setTimeout( () => notification.style.transform = "translateY(-200%)", 3000);
+    closeNotification.addEventListener("click", () =>{
+        notification.style.transform = "translateY(-200%)"
+    });
+}

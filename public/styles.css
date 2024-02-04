@@ -182,3 +182,31 @@ dialog{
         height: 32px;
     }
 }
+
+/* Notification */
+
+.notification{
+    display: flex;
+    row-gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: rgb(12, 91, 64);
+    width: 300px;
+    padding: 1rem .2rem;
+    position: absolute;
+    top: 8%;
+    left: calc(50% - 125px);
+    transform: translateY(-200%);
+    transition: transform 500ms  ;
+}
+
+.notification p, .notification button{
+    background-color: transparent;
+    margin: auto;
+}
+
+.notification button{
+    border: none;
+    cursor: pointer;
+    color: darkgoldenrod;
+}
