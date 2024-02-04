@@ -139,7 +139,7 @@ hr.bottom{
 
 /* Loading */
 
-dialog{
+dialog, dialog p{
     border: none;
     background-color: transparent;
 }
@@ -148,6 +148,7 @@ dialog{
     position: relative;
     width: 80px;
     height: 80px;
+    margin: auto;
     background-color: transparent;
 }
 
