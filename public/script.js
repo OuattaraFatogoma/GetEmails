@@ -71,8 +71,8 @@ const notify = (message, type = "success") => {
     }
     notification.children[0].textContent = message;
     notification.style.transform = "translateY(100%)";
-    setTimeout( () => notification.style.transform = "translateY(-200%)", 3000);
+    setTimeout( () => notification.style.transform = "translateY(-300%)", 3000);
     closeNotification.addEventListener("click", () =>{
-        notification.style.transform = "translateY(-200%)"
+        notification.style.transform = "translateY(-300%)"
     });
 }
