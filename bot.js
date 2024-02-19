@@ -26,7 +26,7 @@ const bot = async (req, res) => {
         await page.type(".gLFyf", toSearch , {delay: 10});
         await page.keyboard.press("Enter", {delay : 10});
         await page.waitForSelector("#result-stats");
-        await new Promise((resolve)=> setTimeout(resolve,5000));
+        await new Promise((resolve)=> setTimeout(resolve,10));
 
         // Open n pages
         for(let i=0; i< 100; i++){
@@ -34,7 +34,6 @@ const bot = async (req, res) => {
                 await autoscroll(page);
             }
             catch(err){
-                console.log("Finish");
                 break;
             } 
         }
@@ -71,9 +70,9 @@ async function autoscroll(page){
         previousHeight = await page.evaluate('document.body.scrollHeight');
         await page.evaluate('window.scrollTo(0, document.body.scrollHeight)');
         await page.waitForFunction(`document.body.scrollHeight > ${previousHeight}`);
-        await new Promise((resolve)=> setTimeout(resolve,2000));
+        await new Promise((resolve)=> setTimeout(resolve,10));
         if(page.waitForSelector(".RVQdVd")){
-          await new Promise((resolve)=> setTimeout(resolve,500));
+          await new Promise((resolve)=> setTimeout(resolve,10));
           await page.click(".RVQdVd")
           break;
         } 
