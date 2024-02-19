@@ -31,8 +31,9 @@ form.addEventListener('submit', async (event) => {
         });
         if(response.status === 500) throw new Error("Something went wrong please try again");
         const emails = await response.json(); 
-        display.value = emails.join(",\n");
+        display.value = emails.join("\n");
         copyBtn.style.display = "block";
+        copyBtn.textContent = `Copy ${emails.length} emails`;
         notify("Emails List ready !");
     } catch (error) {
         notify("Something went wrong, try again", "danger");
