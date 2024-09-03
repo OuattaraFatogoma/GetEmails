@@ -5,6 +5,7 @@ const bot = async (req, res) => {
     const toSearch = req.body.message; 
     let emails = [];
     let regex = /[A-Za-z0-9.]+@[A-Za-z0-9]+\.com/g;
+    let elements = [];
     const browser = await puppeteer.launch({
         args: [
             "--disable-setuid-sandbox",
@@ -29,21 +30,33 @@ const bot = async (req, res) => {
         await page.waitForSelector("#result-stats");
         await new Promise((resolve)=> setTimeout(resolve,10));
 
-        // Open n pages
-        for(let i=0; i< 100; i++){
-            try{
-                await autoscroll(page);
+        if(page.waitForSelector(".AaVjTc")){
+            // Bot to scrap page with navigation bar
+            for(let i=0; i< 100; i++){
+                await page.click(".BBwThe #pnnext");
+                const elements = await page.$$('div');
+                for(let element of elements){
+                    let source = await page.evaluate(el => el.textContent, element);
+                    await element.dispose();
+                    const matches = source.match(regex);
+                    if(matches!==null) emails.push(...matches);
+                };
+                await new Promise((resolve)=> setTimeout(resolve, 1000));
             }
-            catch(err){
-                break;
-            } 
+            
         }
 
-    } catch (error) {
-        console.log(error);
-    }
-    finally{
-        try {
+        else{
+            // Bot to scrap page without navigation bar
+            // Open n pages
+            for(let i=0; i< 100; i++){
+                try{
+                    await autoscroll(page);
+                }
+                catch(err){
+                    break;
+                } 
+            }
             // Collect each html element that can contain email
             const elements = await page.$$('div.MjjYud');
             for(let element of elements){
@@ -52,7 +65,14 @@ const bot = async (req, res) => {
                 const matches = source.match(regex);
                 if(matches!==null) emails.push(...matches);
             };
-     
+
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+    finally{
+        try {
             // clean emails and send them to the frontend
             emails = [...(new Set(emails))];
             emails = emails.map(email => email.toLowerCase());

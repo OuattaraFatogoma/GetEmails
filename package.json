@@ -1,6 +1,6 @@
 {
   "name": "getemails",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "collect emails from a certains input",
   "main": "index.js",
   "scripts": {
